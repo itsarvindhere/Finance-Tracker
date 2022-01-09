@@ -1,7 +1,7 @@
 import './Signup.css';
 
 //React Imports
-import {useState} from 'react';
+import {useEffect, useState, useRef} from 'react';
 
 //Custom Signup Hook
 import { useSignUp } from '../../hooks/useSignUp';
@@ -17,7 +17,7 @@ export const Signup = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-
+    const [passwordMismatch, setPasswordMismatch]= useState(false);
     //Custom Sign Up Hook
     const {signUp, error, isPending} = useSignUp();
     
@@ -29,6 +29,22 @@ export const Signup = () => {
         e.preventDefault();
         signUp(email, password, displayName);
     }
+
+
+    const confirmRef = useRef();
+
+    useEffect(() => {
+        if(password && confirmRef.current.value.length > 0) {
+            if(password !== confirmPassword){
+                setPasswordMismatch(true)
+            } else{
+                setPasswordMismatch(false);
+            }
+        } else {
+            setPasswordMismatch(false)
+        }
+         
+    },[password, confirmPassword])
 
     return (
         <form className={`signup-form ${modeClassString}`} onSubmit={handleSubmit}>
@@ -66,10 +82,14 @@ export const Signup = () => {
                 <span>Confirm Password:</span>
                 <input 
                     type="password"
+                    ref={confirmRef}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     value={confirmPassword}
                     required
+                    disabled={password===''}
                 />
+              {passwordMismatch &&  <p className='error'>Passwords did not match. Please check again!</p>
+               }
             </label>
 
             { !isPending && <button className={`btn ${modeClassString}`}>
