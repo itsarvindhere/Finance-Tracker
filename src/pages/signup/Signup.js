@@ -27,7 +27,9 @@ export const Signup = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        signUp(email, password, displayName);
+        if(!passwordMismatch){
+            signUp(email, password, displayName);
+        }
     }
 
 
