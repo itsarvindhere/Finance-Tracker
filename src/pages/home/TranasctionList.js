@@ -93,8 +93,8 @@ export const TranasctionList = ({transactions, modeClassString}) => {
                         value={editNameValue}onChange={(e) => setEditNameValue(e.target.value)}
                     />
                     {!response.isPending && <div className='buttons-container'>
-                    <button className='edit-button' onClick={() => handleUpdate(transaction.transactionName,transaction.transactionAmount)}>Update</button>
-                    <button className='edit-button' onClick={handleNameCancel}>Cancel</button>
+                    <button className='btn edit-button' onClick={() => handleUpdate(transaction.transactionName,transaction.transactionAmount)}>Update</button>
+                    <button className='btn edit-button' onClick={handleNameCancel}>Cancel</button>
                     </div>
                     }
                     {response.isPending && <img 
@@ -123,8 +123,8 @@ export const TranasctionList = ({transactions, modeClassString}) => {
                         type="number"
                     />
                     {!response.isPending && <div className='buttons-container'>
-                    <button className='edit-button' onClick={() => handleUpdate(transaction.transactionName,transaction.transactionAmount)}>Update</button>
-                    <button className='edit-button' onClick={handleAmountCancel}>Cancel</button>
+                    <button className='btn edit-button' onClick={() => handleUpdate(transaction.transactionName,transaction.transactionAmount)}>Update</button>
+                    <button className='btn edit-button' onClick={handleAmountCancel}>Cancel</button>
                     </div>
                     }
                     {response.isPending && <img 
